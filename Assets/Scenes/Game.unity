@@ -219,6 +219,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeTrigger: {fileID: 253255933}
   volumeLayer:
+<<<<<<< HEAD
+=======
+    serializedVersion: 2
+>>>>>>> dev
     m_Bits: 256
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
@@ -228,9 +232,12 @@ MonoBehaviour:
     sharpness: 0.25
     stationaryBlending: 0.95
     motionBlending: 0.85
+<<<<<<< HEAD
     <jitter>k__BackingField: {x: 0, y: 0}
     m_ResetHistory: 1
     <sampleIndex>k__BackingField: 0
+=======
+>>>>>>> dev
   subpixelMorphologicalAntialiasing:
     quality: 2
   fastApproximateAntialiasing:
@@ -239,6 +246,7 @@ MonoBehaviour:
   fog:
     enabled: 1
     excludeSkybox: 1
+<<<<<<< HEAD
   dithering:
     m_NoiseTextureIndex: 16
   debugLayer:
@@ -254,6 +262,23 @@ MonoBehaviour:
     <debugOverlayTarget>k__BackingField: {fileID: 0}
     <debugOverlayActive>k__BackingField: 0
     <debugOverlay>k__BackingField: 0
+=======
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+>>>>>>> dev
     overlaySettings:
       linearDepth: 0
       motionColorIntensity: 4
@@ -267,12 +292,15 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+<<<<<<< HEAD
   <cameraDepthFlags>k__BackingField: 0
   <haveBundlesBeenInited>k__BackingField: 0
   m_Camera: {fileID: 253255932}
   m_SettingsUpdateNeeded: 1
   m_IsRenderingInSceneView: 0
   m_NaNKilled: 0
+=======
+>>>>>>> dev
 --- !u!1 &300310393
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +370,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2061448949
+<<<<<<< HEAD
   m_SortingLayer: 0
+=======
+  m_SortingLayer: 2
+>>>>>>> dev
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 371fa23a16c2b470dbbdf50d24a9c247, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -352,7 +384,11 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+<<<<<<< HEAD
   m_WasSpriteAssigned: 0
+=======
+  m_WasSpriteAssigned: 1
+>>>>>>> dev
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &300310396
@@ -374,6 +410,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+<<<<<<< HEAD
 --- !u!1 &492157174
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,6 +787,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> dev
 --- !u!1 &536642108
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,10 +823,13 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+<<<<<<< HEAD
   m_PreviousLayer: 8
   m_PreviousPriority: 0
   m_TempColliders: []
   m_InternalProfile: {fileID: 0}
+=======
+>>>>>>> dev
 --- !u!4 &536642110
 Transform:
   m_ObjectHideFlags: 0
@@ -837,7 +879,10 @@ MonoBehaviour:
   _scoreText: {fileID: 936152905}
   _gameOver: {fileID: 618726789}
   _restart: {fileID: 634311559}
+<<<<<<< HEAD
   _currentScore: 0
+=======
+>>>>>>> dev
   _livesImage: {fileID: 1343496688}
   _livesSprites:
   - {fileID: 21300000, guid: ba53e111f0125654cabfd4eefaf3a657, type: 3}
@@ -1171,7 +1216,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2061448949
+<<<<<<< HEAD
   m_SortingLayer: 0
+=======
+  m_SortingLayer: 2
+>>>>>>> dev
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a45d21c30e0154a9ca1a5d6fb2bf3cfa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1181,7 +1230,11 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+<<<<<<< HEAD
   m_WasSpriteAssigned: 0
+=======
+  m_WasSpriteAssigned: 1
+>>>>>>> dev
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &734977201
@@ -1304,7 +1357,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -813059521
+<<<<<<< HEAD
   m_SortingLayer: 0
+=======
+  m_SortingLayer: 1
+>>>>>>> dev
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 351f30ffb741fd643b82bde90a222699, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1314,7 +1371,11 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+<<<<<<< HEAD
   m_WasSpriteAssigned: 0
+=======
+  m_WasSpriteAssigned: 1
+>>>>>>> dev
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &912283381
@@ -1561,7 +1622,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0c69f533ddc5243a897ef635043979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   _isGameOver: 0
+=======
+>>>>>>> dev
 --- !u!4 &1037877318
 Transform:
   m_ObjectHideFlags: 0
@@ -1703,6 +1767,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+<<<<<<< HEAD
 --- !u!1 &1243207393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1944,6 +2009,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> dev
 --- !u!1 &1320879378
 GameObject:
   m_ObjectHideFlags: 0
@@ -2013,7 +2080,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2061448949
+<<<<<<< HEAD
   m_SortingLayer: 0
+=======
+  m_SortingLayer: 2
+>>>>>>> dev
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 371fa23a16c2b470dbbdf50d24a9c247, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2023,7 +2094,11 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+<<<<<<< HEAD
   m_WasSpriteAssigned: 0
+=======
+  m_WasSpriteAssigned: 1
+>>>>>>> dev
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &1320879381
@@ -2169,9 +2244,12 @@ MonoBehaviour:
   - {fileID: 7650775649113570763, guid: f6dd9e334042a6a46950394684b90234, type: 3}
   - {fileID: 3224037421501435831, guid: 98192ca594c292b4481ad4429893ac51, type: 3}
   - {fileID: 2565290758972032437, guid: e8573ac224a7d334dbf3299c14477fdb, type: 3}
+<<<<<<< HEAD
   _stopSpawning: 0
   _enemySpawnPos: {x: 0, y: 0, z: 0}
   _powerUpSpawnPos: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> dev
 --- !u!1 &1803239724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,6 +2288,7 @@ MonoBehaviour:
   _shield: {fileID: 1830270909}
   _thrusterR: {fileID: 1320879378}
   _thrusterL: {fileID: 300310393}
+<<<<<<< HEAD
   _offset: {x: 0, y: 0, z: 0}
   _speed: 6
   _speedBoost: 2
@@ -2225,6 +2304,13 @@ MonoBehaviour:
   _isTripleShotActive: 0
   _isSpeedBoostActive: 0
   _isShieldActive: 0
+=======
+  _speed: 6
+  _fireRate: 0.15
+  _lives: 3
+  _score: 0
+  _laserSFX: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+>>>>>>> dev
 --- !u!212 &1803239726
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2262,7 +2348,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2061448949
+<<<<<<< HEAD
   m_SortingLayer: 0
+=======
+  m_SortingLayer: 2
+>>>>>>> dev
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1b4a8fdd39d3a45d0a9ee484ad6800ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2272,7 +2362,11 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+<<<<<<< HEAD
   m_WasSpriteAssigned: 0
+=======
+  m_WasSpriteAssigned: 1
+>>>>>>> dev
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1803239727
@@ -2470,7 +2564,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2061448949
+<<<<<<< HEAD
   m_SortingLayer: 0
+=======
+  m_SortingLayer: 2
+>>>>>>> dev
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 333b0196b7a764df5a7768ead9b69dbc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2480,7 +2578,11 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+<<<<<<< HEAD
   m_WasSpriteAssigned: 0
+=======
+  m_WasSpriteAssigned: 1
+>>>>>>> dev
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1830270911
