@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
+  _eLaserDouble: {fileID: 4893746559739924597, guid: 56024e61c5ffa3e43aca389401ebc54c,
+    type: 3}
   _explosionSFX: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
 --- !u!212 &1085404609020093954
 SpriteRenderer:
