@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 253255932}
   - component: {fileID: 253255931}
   - component: {fileID: 253255934}
+  - component: {fileID: 253255935}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -265,6 +266,18 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &253255935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253255930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c1c5a22e24e81c45bf1196d9c4726da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &300310393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,6 +1353,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1056213539
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -3809576592937970912, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: _speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921278034653366441, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035275749292300436, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035275749292300436, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035275749292300436, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035275749292300436, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035275749292300436, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035275749292300436, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035275749292300436, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035275749292300436, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035275749292300436, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035275749292300436, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035275749292300436, guid: 4e6400e9834d4894dac60c2643e4d946,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4e6400e9834d4894dac60c2643e4d946, type: 3}
 --- !u!1 &1098337996
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,6 +1781,8 @@ MonoBehaviour:
   - {fileID: 2565290758972032437, guid: e8573ac224a7d334dbf3299c14477fdb, type: 3}
   - {fileID: 8695647127126508190, guid: a93067c09c94022408555721d489c765, type: 3}
   - {fileID: 2576584707176755929, guid: bcb148a8eaebb664180b9607ac8c2e71, type: 3}
+  - {fileID: 6489920481883347596, guid: 174bca3d84900734db18b36b15a109cb, type: 3}
+  _stopSpawning: 0
 --- !u!1 &1803239724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1732,6 +1821,7 @@ MonoBehaviour:
   _homingShot: {fileID: 1567136133611179942, guid: 4c5628ae937c7a64faa754378c80602e,
     type: 3}
   _shield: {fileID: 1830270909}
+  _mainCamera: {fileID: 253255930}
   _thrusterR: {fileID: 1320879378}
   _thrusterL: {fileID: 300310393}
   _speed: 6

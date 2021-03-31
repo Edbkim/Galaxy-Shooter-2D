@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     private GameObject _homingShot;
     [SerializeField]
     private GameObject _shield;
+    [SerializeField]
+    private GameObject _mainCamera;
 
     [SerializeField]
     private GameObject _thrusterR, _thrusterL;
@@ -31,6 +33,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
 
+    //[SerializeField]
+    //private int _iFrames = 3; //# of Seconds of given invincibility frames after getting hit. (For some reason did not work on the for loop.
+    //Check into this at a later time as I would prefer not hard coding the iFrame amount in the loop.
+
     [SerializeField]
     private int _currentAmmo;
 
@@ -42,6 +48,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private AudioClip _laserSFX;
+    [SerializeField]
+    private AudioClip _takeDamageSFX;
     private AudioSource _audioSource;
 
     [SerializeField]
@@ -51,12 +59,15 @@ public class Player : MonoBehaviour
     private UIManager _uiManager;
     private GameManager _gameManager;
     private SpriteRenderer _shieldSpriteRenderer;
+    private ScreenShake _screenShake;
+    private SpriteRenderer _spriteRenderer;
 
     private bool _isTripleShotActive;
     private bool _isSpeedBoostActive;
     private bool _isShieldActive;
     private bool _isThrusterActive;
     private bool _isHomingShotActive;
+    private bool _isInvincible;
 
 
 
@@ -97,6 +108,15 @@ public class Player : MonoBehaviour
         if (_shieldSpriteRenderer == null)
         {
             Debug.LogError("Shield Sprite Renderer is NULL");
+        }
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        _screenShake = _mainCamera.GetComponent<ScreenShake>();
+
+        if (_screenShake == null)
+        {
+            Debug.LogError("ScreenShake is NULL");
         }
 
         
@@ -211,27 +231,45 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-
-        if (_isShieldActive == true)
+        if (_isInvincible == false)
         {
-            _shieldHealth--;
 
-            return;
+            if (_isShieldActive == true)
+            {
+                _shieldHealth--;
 
+                return;
+
+            }
+            else
+            {
+                _isInvincible = true;
+                _lives--;
+                _uiManager.UpdateLives(_lives);
+                _screenShake.TriggerShake();
+                UpdateThrusters();
+
+                if (_lives >= 1)
+                {
+                    AudioSource.PlayClipAtPoint(_takeDamageSFX, transform.position);
+                    StartCoroutine(InvincibilityFrames());
+                }
+
+                if (_lives < 1)
+                {
+                    _spawnManager.PlayerDeath();
+                    _gameManager.GameOver();
+                    Destroy(this.gameObject);
+                }
+            }
         }
         else
         {
-            _lives--;
-            _uiManager.UpdateLives(_lives);
-            UpdateThrusters();
-
-            if (_lives < 1)
-            {
-                _spawnManager.PlayerDeath();
-                _gameManager.GameOver();
-                Destroy(this.gameObject);
-            }
+            return;
         }
+
+
+        
 
     }
 
@@ -337,5 +375,47 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         _isHomingShotActive = false;
+    }
+
+    IEnumerator InvincibilityFrames()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            _spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(.5f);
+            _spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(.5f);
+        }
+
+        _isInvincible = false;
+
+
+        /*for (int i = 0; i < 4; i++)
+        {
+            float aValue = 0f;
+            float aTime = 0.4f;
+            float alpha = _spriteRenderer.material.color.a;
+
+            for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+            {
+                Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
+                _spriteRenderer.material.color = newColor;
+            }
+
+            yield return new WaitForSeconds(0.1f);
+
+            aValue = 1f;
+            for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+            {
+                Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
+                _spriteRenderer.material.color = newColor;
+            }
+
+            yield return new WaitForSeconds(0.1f);
+
+
+        }*/
+        
+
     }
 }
