@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
 
     private int _score = 0;
 
+
     [SerializeField]
     private AudioClip _laserSFX;
     [SerializeField]
@@ -375,12 +376,25 @@ public class Player : MonoBehaviour
         _score = _score += plusScore;
         _uiManager.UpdateScore(_score);
 
+        switch(_score)
+        {
+            case 100:
+                _spawnManager.NextWave();
+                break;
+            case 200:
+                _spawnManager.NextWave();
+                break;
+            default:
+                break;
+        }
+
     }
 
     public void UpdateAmmo()
     {
         _uiManager.UpdateAmmo(_currentAmmo);
     }
+
 
     IEnumerator TripleShotPowerDown()
     {

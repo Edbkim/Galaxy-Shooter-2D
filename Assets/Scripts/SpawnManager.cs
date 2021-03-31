@@ -20,22 +20,26 @@ public class SpawnManager : MonoBehaviour
 
     private int[] _siderSpawnPos = new int[] { -8, 8 };
 
-
+    private int _wave;
+    private int _maxWave = 2;
 
     private float _randomPowerUp;
+
+    private UIManager _uiManager;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        _wave = 0;
+        _uiManager = GameObject.Find("UI_Manager").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        _wave = Mathf.Clamp(_wave, 0, _maxWave);
     }
 
     public void StartSpawning()
@@ -47,26 +51,27 @@ public class SpawnManager : MonoBehaviour
     {
         if (_enemy != null)
         {
-            yield return new WaitForSeconds(3);
 
             while (_stopSpawning == false)
             {
-                int RandomEnemy = Random.Range(0, 2);
-                if (RandomEnemy == 0)
-                {
-                    _enemySpawnPos = new Vector3(Random.Range(-10.5f, 11f), 8, 0);
-                    GameObject newEnemy = Instantiate(_enemy[RandomEnemy], _enemySpawnPos, Quaternion.identity);
-                    newEnemy.transform.parent = _enemyContainer.transform;
-                }
-                else if (RandomEnemy == 1)
-                {
-                    _enemySpawnPos = new Vector3(Random.Range(0, _siderSpawnPos.Length), 8, 0);
-                    GameObject newEnemy = Instantiate(_enemy[RandomEnemy], _enemySpawnPos, Quaternion.identity);
-                    newEnemy.transform.parent = _enemyContainer.transform;
-                }
 
 
-                yield return new WaitForSeconds(2);
+                switch (_wave)
+                {
+                    case 0:
+                        EnemySpawn(0);
+                        yield return new WaitForSeconds(2);
+                        break;
+                    case 1:
+                        EnemySpawn(1);
+                        yield return new WaitForSeconds(2);
+                        break;
+                    case 2:
+                        EnemySpawn(Random.Range(0, 2));
+                        yield return new WaitForSeconds(1);
+                        break;
+                }
+ 
             }
         }
     }
@@ -102,5 +107,35 @@ public class SpawnManager : MonoBehaviour
     public void PlayerDeath()
     {
         _stopSpawning = true;
+    }
+
+    public void NextWave()
+    {
+        _wave++;
+
+        if (_wave > _maxWave)
+        {
+            _wave = _maxWave;
+        }
+
+        _uiManager.UpdateWaveCount(_wave);
+
+    }
+
+    public void EnemySpawn(int enemyID)
+    {
+        if (enemyID == 0)
+        {
+            _enemySpawnPos = new Vector3(Random.Range(-10.5f, 11f), 8, 0);
+            GameObject newEnemy = Instantiate(_enemy[enemyID], _enemySpawnPos, Quaternion.identity);
+            newEnemy.transform.parent = _enemyContainer.transform;
+        }
+        else if (enemyID == 1)
+        {
+            _enemySpawnPos = new Vector3(Random.Range(0, _siderSpawnPos.Length), 8, 0);
+            GameObject newEnemy = Instantiate(_enemy[enemyID], _enemySpawnPos, Quaternion.identity);
+            newEnemy.transform.parent = _enemyContainer.transform;
+        }
+
     }
 }

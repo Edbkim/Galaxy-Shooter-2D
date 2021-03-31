@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text _ammoMaxText;
 
+    [SerializeField]
+    private Text _waveText;
+
     private int _currentScore;
     private int _maxAmmo;
 
@@ -75,6 +78,11 @@ public class UIManager : MonoBehaviour
     {
         _ammoMaxText.text = "Max Ammo: " + maxAmmo;
         _maxAmmo = maxAmmo;
+    }
+
+    public void UpdateWaveCount(int wave)
+    {
+        _waveText.text = "Wave: " + wave;
     }
     void GameOverSequence()
     {
