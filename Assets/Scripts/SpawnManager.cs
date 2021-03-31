@@ -20,6 +20,11 @@ public class SpawnManager : MonoBehaviour
 
     private int[] _siderSpawnPos = new int[] { -8, 8 };
 
+    private int[] _highChance = new int[] { 3 }; //3 ammo
+    private int[] _mediumChance = new int[] { 0, 1, 2 }; // 0 Triple, 1 Speed, 2 Shield
+    private int[] _lowChance = new int[] { 4, 6 }; // 4 Health, 6 AmmoMaxDown
+    private int[] _veryLowChance = new int[] { 5 }; // 5 HomingShot
+
     private int _wave;
     private int _maxWave = 2;
 
@@ -84,20 +89,27 @@ public class SpawnManager : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(3, 7));
             _powerUpSpawnPos = new Vector3(Random.Range(-10.5f, 11f), 8, 0);
-            _randomPowerUp = Random.value;
+            _randomPowerUp = Random.Range(0, 101);
 
-            if (_randomPowerUp <= 0.8)
+            if (_randomPowerUp <= 40)
             {
-                int RandomPUP = Random.Range(0, 5);
+                int RandomPUP = _highChance[Random.Range(0, _highChance.Length)];
                 Instantiate(_powerups[RandomPUP], _powerUpSpawnPos, Quaternion.identity);
             }
-            else if (_randomPowerUp > 0.8f && _randomPowerUp <= 0.95f)
+            else if (_randomPowerUp > 40 && _randomPowerUp <= 70)
             {
-                Instantiate(_powerups[6], _powerUpSpawnPos, Quaternion.identity);
+                int RandomPUP = _mediumChance[Random.Range(0, _mediumChance.Length)];
+                Instantiate(_powerups[RandomPUP], _powerUpSpawnPos, Quaternion.identity);
+            }
+            else if (_randomPowerUp > 70 && _randomPowerUp <= 90)
+            {
+                int RandomPUP = _lowChance[Random.Range(0, _lowChance.Length)];
+                Instantiate(_powerups[RandomPUP], _powerUpSpawnPos, Quaternion.identity);
             }
             else
             {
-                Instantiate(_powerups[5], _powerUpSpawnPos, Quaternion.identity);
+                int RandomPUP = _veryLowChance[Random.Range(0, _veryLowChance.Length)];
+                Instantiate(_powerups[RandomPUP], _powerUpSpawnPos, Quaternion.identity);
             }
 
         }

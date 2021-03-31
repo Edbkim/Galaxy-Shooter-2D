@@ -262,6 +262,7 @@ public class Player : MonoBehaviour
 
             if (_isShieldActive == true)
             {
+
                 _shieldHealth--;
 
                 return;

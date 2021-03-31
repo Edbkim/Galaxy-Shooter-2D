@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
 
     private bool _goingLeft;
 
+    private bool _dead;
+
 
     private void Start()
     {
@@ -92,7 +94,7 @@ public class Enemy : MonoBehaviour
         }
         
 
-        if (Time.time > _canFire)
+        if (Time.time > _canFire && _dead == false)
         {
             if (_enemyID == 0)
             {
@@ -162,6 +164,9 @@ public class Enemy : MonoBehaviour
         {
             _player.Damage();
             _speed = 0;
+            _siderSpeedX = 0;
+            _siderSpeedY = 0;
+            _dead = true;
             _animator.SetTrigger("OnEnemyDeath");
             _audioSource.Play();
             _collider.enabled = false;
@@ -176,6 +181,7 @@ public class Enemy : MonoBehaviour
             _speed = 0;
             _siderSpeedX = 0;
             _siderSpeedY = 0;
+            _dead = true;
 
             _animator.SetTrigger("OnEnemyDeath");
 
