@@ -60,6 +60,9 @@ public class Powerup : MonoBehaviour
                         Debug.Log("Health Restored");
                         player.Heal();
                         break;
+                    case 5:
+                        player.HomingShotActive();
+                        break;
                     default:
                         break;
                 }

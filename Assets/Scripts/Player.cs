@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _tripleShot;
     [SerializeField]
+    private GameObject _homingShot;
+    [SerializeField]
     private GameObject _shield;
 
     [SerializeField]
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour
     private bool _isSpeedBoostActive;
     private bool _isShieldActive;
     private bool _isThrusterActive;
+    private bool _isHomingShotActive;
 
 
 
@@ -175,13 +178,22 @@ public class Player : MonoBehaviour
             Instantiate(_tripleShot, transform.position, Quaternion.identity);
             _audioSource.Play();
         }
-        else if (_isTripleShotActive == false && _currentAmmo >= 1)
+        else if (_isTripleShotActive == false && _isHomingShotActive == false && _currentAmmo >= 1)
         {
             _currentAmmo--;
             UpdateAmmo();
             _offset = new Vector3(0, 1.05f, 0);
             Instantiate(_laser, transform.position + _offset, Quaternion.identity);
             _audioSource.Play();
+        }
+        else if (_isTripleShotActive == false && _isHomingShotActive == true)
+        {
+            _offset = new Vector3(0, 1.05f, 0);
+            GameObject homingLaser = Instantiate(_homingShot, transform.position + _offset, Quaternion.identity);
+            Laser laser = homingLaser.GetComponent<Laser>();
+            laser.AssignHomingLaser();
+            _audioSource.Play();
+
         }
         else
         {
@@ -255,6 +267,12 @@ public class Player : MonoBehaviour
         StartCoroutine(TripleShotPowerDown());
     }
 
+    public void HomingShotActive()
+    {
+        _isHomingShotActive = true;
+        StartCoroutine(HomingShotPowerDown());
+    }
+
     public void ShieldActive()
     {
         _isShieldActive = true;
@@ -313,5 +331,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         _isSpeedBoostActive = false;
+    }
+
+    IEnumerator HomingShotPowerDown()
+    {
+        yield return new WaitForSeconds(5);
+        _isHomingShotActive = false;
     }
 }

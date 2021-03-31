@@ -9,15 +9,32 @@ public class Laser : MonoBehaviour
 
     private bool _isEnemyLaser;
 
+    private bool _isHomingLaser;
 
+    private Transform _target;
+    private Rigidbody2D _rigidBody;
+    private float _rotateSpeed = 200f;
+    private float _homingSpeed = 10;
+
+
+    private void Start()
+    {
+        _rigidBody = GetComponent<Rigidbody2D>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (_isEnemyLaser == false)
+        if (_isEnemyLaser == false && _isHomingLaser == false)
         {
             MoveUp();
         }
+        else if (_isHomingLaser == true)
+        {
+            _target = GameObject.FindGameObjectWithTag("Enemy").transform;
+            HomingLaser();
+            Destroy(this.gameObject, 2);
+        }      
         else
         {
             MoveDown();
@@ -58,6 +75,8 @@ public class Laser : MonoBehaviour
         }
     }
 
+
+
     public void AssignEnemyLaser()
     {
         _isEnemyLaser = true;
@@ -77,5 +96,23 @@ public class Laser : MonoBehaviour
 
             Destroy(this.gameObject);
         }
+    }
+
+    public void AssignHomingLaser()
+    {
+        _isHomingLaser = true;
+    }
+
+    void HomingLaser()
+    {
+
+        Vector2 direction = (Vector2)_target.position - _rigidBody.position;
+
+        direction.Normalize();
+
+        float rotateAmount = Vector3.Cross(direction, transform.up).z;
+        _rigidBody.angularVelocity = -rotateAmount * _rotateSpeed;
+        _rigidBody.velocity = transform.up * _homingSpeed;
+
     }
 }
