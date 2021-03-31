@@ -30,6 +30,9 @@ public class Player : MonoBehaviour
     private int _lives = 3;
 
     [SerializeField]
+    private int _shieldHealth;
+
+    [SerializeField]
     private int _score = 0;
 
     [SerializeField]
@@ -39,6 +42,7 @@ public class Player : MonoBehaviour
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
     private GameManager _gameManager;
+    private SpriteRenderer _shieldSpriteRenderer;
 
     private bool _isTripleShotActive;
     private bool _isSpeedBoostActive;
@@ -79,12 +83,21 @@ public class Player : MonoBehaviour
             _audioSource.clip = _laserSFX;
         }
 
+        _shieldSpriteRenderer = _shield.GetComponent<SpriteRenderer>();
+
+        if (_shieldSpriteRenderer == null)
+        {
+            Debug.LogError("Shield Sprite Renderer is NULL");
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
         CalculateMovement();
+
+        ShieldHealth();
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
@@ -164,9 +177,10 @@ public class Player : MonoBehaviour
 
         if (_isShieldActive == true)
         {
-            _isShieldActive = false;
-            _shield.SetActive(false);
+            _shieldHealth--;
+
             return;
+
         }
         else
         {
@@ -202,7 +216,6 @@ public class Player : MonoBehaviour
 
     }
 
-
     public void SpeedUp()
     {
         _isSpeedBoostActive = true;
@@ -218,11 +231,31 @@ public class Player : MonoBehaviour
     public void ShieldActive()
     {
         _isShieldActive = true;
+        _shieldHealth = 3;
         _shield.SetActive(true);
     }
 
-    //add 10 to score
-    //communicate with UI to update score
+    public void ShieldHealth()
+    {
+        switch (_shieldHealth)
+        {
+            case 0:
+                _isShieldActive = false;
+                _shield.SetActive(false);
+                break;
+            case 1:
+                _shieldSpriteRenderer.color = Color.red;
+                break;
+            case 2:
+                _shieldSpriteRenderer.color = Color.blue;
+                break;
+            case 3:
+                _shieldSpriteRenderer.color = Color.white;
+                break;
+            default:
+                break;
+        }
+    }
 
     public void AddScore(int plusScore)
     {
