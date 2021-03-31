@@ -56,6 +56,10 @@ public class Powerup : MonoBehaviour
                         Debug.Log("Reloaded Ammo!");
                         player.Reload();
                         break;
+                    case 4:
+                        Debug.Log("Health Restored");
+                        player.Heal();
+                        break;
                     default:
                         break;
                 }

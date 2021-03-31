@@ -115,6 +115,7 @@ public class Player : MonoBehaviour
         }
 
         _currentAmmo = Mathf.Clamp(_currentAmmo, 0, 15);
+        _lives = Mathf.Clamp(_lives, 0, 3);
 
 
     }
@@ -210,32 +211,34 @@ public class Player : MonoBehaviour
         {
             _lives--;
             _uiManager.UpdateLives(_lives);
-
-
-            if (_lives == 2)
-            {
-                _thrusterL.SetActive(false);
-                _thrusterR.SetActive(true);
-            }
-            else if (_lives >= 3)
-            {
-                _thrusterL.SetActive(false);
-                _thrusterR.SetActive(false);
-            }
-            else if (_lives == 1)
-            {
-                _thrusterL.SetActive(true);
-                _thrusterR.SetActive(true);
-            }
-                
+            UpdateThrusters();
 
             if (_lives < 1)
             {
-                
                 _spawnManager.PlayerDeath();
                 _gameManager.GameOver();
                 Destroy(this.gameObject);
             }
+        }
+
+    }
+
+    public void UpdateThrusters()
+    {
+        if (_lives == 2)
+        {
+            _thrusterL.SetActive(false);
+            _thrusterR.SetActive(true);
+        }
+        else if (_lives >= 3)
+        {
+            _thrusterL.SetActive(false);
+            _thrusterR.SetActive(false);
+        }
+        else if (_lives == 1)
+        {
+            _thrusterL.SetActive(true);
+            _thrusterR.SetActive(true);
         }
 
     }
@@ -279,6 +282,13 @@ public class Player : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void Heal()
+    {
+        _lives++;
+        _uiManager.UpdateLives(_lives);
+        UpdateThrusters();
     }
 
     public void AddScore(int plusScore)
