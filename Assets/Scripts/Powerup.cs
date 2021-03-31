@@ -7,6 +7,9 @@ public class Powerup : MonoBehaviour
     [SerializeField]
     private int _speed = 3;
 
+    [SerializeField]
+    private int _ammoDown = 1;
+
     [SerializeField] //0 Triple / 1 Speed / 2 Shield
     private int _powerupID;
 
@@ -62,6 +65,9 @@ public class Powerup : MonoBehaviour
                         break;
                     case 5:
                         player.HomingShotActive();
+                        break;
+                    case 6:
+                        player.AmmoMaxDown(_ammoDown);
                         break;
                     default:
                         break;

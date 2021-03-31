@@ -86,7 +86,11 @@ public class SpawnManager : MonoBehaviour
                 int RandomPUP = Random.Range(0, 5);
                 Instantiate(_powerups[RandomPUP], _powerUpSpawnPos, Quaternion.identity);
             }
-            else if (_randomPowerUp > 0.8)
+            else if (_randomPowerUp > 0.8f && _randomPowerUp <= 0.95f)
+            {
+                Instantiate(_powerups[6], _powerUpSpawnPos, Quaternion.identity);
+            }
+            else
             {
                 Instantiate(_powerups[5], _powerUpSpawnPos, Quaternion.identity);
             }

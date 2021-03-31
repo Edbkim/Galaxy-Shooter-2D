@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
     private int _currentAmmo;
     [SerializeField]
     private int _maxAmmo = 15;
+    [SerializeField]
+    private int _minimumMaxAmmo = 5;
 
     [SerializeField]
     private int _shieldHealth;
@@ -233,6 +235,25 @@ public class Player : MonoBehaviour
         _uiManager.UpdateAmmo(_currentAmmo);
     }
 
+    public void AmmoMaxDown(int ammoDown)
+    {
+        _maxAmmo -= ammoDown;
+
+        if (_maxAmmo < 5)
+        {
+            _maxAmmo = 5;
+        }
+
+        if (_currentAmmo > _maxAmmo)
+        {
+            _currentAmmo = _maxAmmo;
+        }
+
+
+        _uiManager.UpdateMaxAmmo(_maxAmmo);
+        _uiManager.UpdateAmmo(_currentAmmo);
+    }
+
     public void Damage()
     {
         if (_isInvincible == false)
@@ -272,9 +293,6 @@ public class Player : MonoBehaviour
         {
             return;
         }
-
-
-        
 
     }
 
