@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _enemy;
+    private GameObject[] _enemy; //0 Default, 1 Sider
     [SerializeField]
     private GameObject _enemyContainer;
 
@@ -18,7 +18,13 @@ public class SpawnManager : MonoBehaviour
     private Vector3 _enemySpawnPos;
     private Vector3 _powerUpSpawnPos;
 
+    private int[] _siderSpawnPos = new int[] { -8, 8 };
+
+
+
     private float _randomPowerUp;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,9 +51,20 @@ public class SpawnManager : MonoBehaviour
 
             while (_stopSpawning == false)
             {
-                _enemySpawnPos = new Vector3(Random.Range(-10.5f, 11f), 8, 0);
-                GameObject newEnemy = Instantiate(_enemy, _enemySpawnPos, Quaternion.identity);
-                newEnemy.transform.parent = _enemyContainer.transform;
+                int RandomEnemy = Random.Range(0, 2);
+                if (RandomEnemy == 0)
+                {
+                    _enemySpawnPos = new Vector3(Random.Range(-10.5f, 11f), 8, 0);
+                    GameObject newEnemy = Instantiate(_enemy[RandomEnemy], _enemySpawnPos, Quaternion.identity);
+                    newEnemy.transform.parent = _enemyContainer.transform;
+                }
+                else if (RandomEnemy == 1)
+                {
+                    _enemySpawnPos = new Vector3(Random.Range(0, _siderSpawnPos.Length), 8, 0);
+                    GameObject newEnemy = Instantiate(_enemy[RandomEnemy], _enemySpawnPos, Quaternion.identity);
+                    newEnemy.transform.parent = _enemyContainer.transform;
+                }
+
 
                 yield return new WaitForSeconds(2);
             }

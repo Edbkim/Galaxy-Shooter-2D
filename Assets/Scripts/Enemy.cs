@@ -6,13 +6,22 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private int _speed = 4;
+    [SerializeField]
+    private int _siderSpeedX = 5;
+    [SerializeField]
+    private int _siderSpeedY = 1;
     private Player _player;
 
     private float _fireRate = 3f;
     private float _canFire = -1f;
 
     [SerializeField]
+    private int _enemyID;
+
+    [SerializeField]
     private GameObject _eLaserDouble;
+    [SerializeField]
+    private GameObject _eLaserSingle;
 
     [SerializeField]
     private AudioClip _explosionSFX;
@@ -20,6 +29,9 @@ public class Enemy : MonoBehaviour
     private Animator _animator;
     private BoxCollider2D _collider;
     private AudioSource _audioSource;
+
+    private bool _goingLeft;
+
 
     private void Start()
     {
@@ -60,31 +72,88 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CalculateMovement();
+
+        if (_enemyID == 0)
+        {
+            CalculateMovementE0();
+        }
+        else if (_enemyID == 1)
+        {
+            if (transform.position.x > 8)
+            {
+                _goingLeft = true;
+            }
+            else if (transform.position.x < -8)
+            {
+                _goingLeft = false;
+            }
+
+            CalculateMovementE1();
+        }
+        
 
         if (Time.time > _canFire)
         {
-            _fireRate = Random.Range(3f, 7f);
-            _canFire = Time.time + _fireRate;
-            GameObject enemyLaser = Instantiate(_eLaserDouble, transform.position, Quaternion.identity);
-            Laser[] lasers = enemyLaser.GetComponentsInChildren<Laser>();
-            
-            for (int i = 0; i < lasers.Length; i++)
+            if (_enemyID == 0)
             {
-                lasers[i].AssignEnemyLaser();
+                _fireRate = Random.Range(3f, 7f);
+                _canFire = Time.time + _fireRate;
+                GameObject enemyLaser = Instantiate(_eLaserDouble, transform.position, Quaternion.identity);
+                Laser[] lasers = enemyLaser.GetComponentsInChildren<Laser>();
+
+                for (int i = 0; i < lasers.Length; i++)
+                {
+                    lasers[i].AssignEnemyLaser();
+                }
             }
+            else if (_enemyID == 1)
+            {
+                _fireRate = Random.Range(3f, 7f);
+                _canFire = Time.time + _fireRate;
+                StartCoroutine(RapidShot());
+            }
+
         }
 
     }
 
-    void CalculateMovement()
+    IEnumerator RapidShot()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 Offset = new Vector3(0, -0.8f, 0);
+            GameObject enemyLaser = Instantiate(_eLaserSingle, transform.position + Offset, Quaternion.identity);
+            Laser lasers = enemyLaser.GetComponent<Laser>();
+
+            lasers.AssignEnemyLaser();
+
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+    void CalculateMovementE0()
     {
         transform.Translate(new Vector3(0, -1, 0) * _speed * Time.deltaTime);
 
         if (transform.position.y < -5.5f)
         {
-            transform.position = new Vector3(Random.Range(-9.5f, 9.5f), 8, 0);
+            Destroy(this.gameObject);
         }
+    }
+
+    void CalculateMovementE1()
+    {
+        if (_goingLeft == true)
+        {
+            transform.Translate(new Vector3((-1 * _siderSpeedX), (-1 * _siderSpeedY), 0) * Time.deltaTime);
+        }
+        else if (_goingLeft == false)
+        {
+            transform.Translate(new Vector3((1 * _siderSpeedX), (-1 * _siderSpeedY), 0) * Time.deltaTime);
+        }
+
+        if (transform.position.y < -7f)
+            Destroy(this.gameObject);
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -105,6 +174,8 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
 
             _speed = 0;
+            _siderSpeedX = 0;
+            _siderSpeedY = 0;
 
             _animator.SetTrigger("OnEnemyDeath");
 
