@@ -14,8 +14,11 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Text _ammoText;
+    [SerializeField]
+    private Text _ammoMaxText;
 
     private int _currentScore;
+    private int _maxAmmo;
 
     [SerializeField]
     private Image _livesImage;
@@ -51,7 +54,12 @@ public class UIManager : MonoBehaviour
 
     public void UpdateAmmo(int ammo)
     {
-        if (ammo >= 1)
+        if (ammo >= _maxAmmo)
+        {
+            _ammoText.color = new Color32(136, 255, 249, 255);
+            _ammoText.text = "Ammo: " + ammo;
+        }
+        else if (ammo >= 1 && ammo < _maxAmmo)
         {
             _ammoText.color = Color.white;
             _ammoText.text = "Ammo: " + ammo;
@@ -61,8 +69,12 @@ public class UIManager : MonoBehaviour
             _ammoText.text = "OUT OF AMMO";
             _ammoText.color = Color.yellow;
         }
+    }
 
-
+    public void UpdateMaxAmmo(int maxAmmo)
+    {
+        _ammoMaxText.text = "Max Ammo: " + maxAmmo;
+        _maxAmmo = maxAmmo;
     }
     void GameOverSequence()
     {

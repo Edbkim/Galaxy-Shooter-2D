@@ -41,11 +41,12 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private int _currentAmmo;
+    [SerializeField]
+    private int _maxAmmo = 15;
 
     [SerializeField]
     private int _shieldHealth;
 
-    [SerializeField]
     private int _score = 0;
 
     [SerializeField]
@@ -122,8 +123,9 @@ public class Player : MonoBehaviour
         }
 
         
-        _currentAmmo = 15;
+        _currentAmmo = _maxAmmo;
         UpdateAmmo();
+        _uiManager.UpdateMaxAmmo(_maxAmmo);
 
     }
 
@@ -139,7 +141,7 @@ public class Player : MonoBehaviour
             FireLaser();
         }
 
-        _currentAmmo = Mathf.Clamp(_currentAmmo, 0, 15);
+        _currentAmmo = Mathf.Clamp(_currentAmmo, 0, _maxAmmo);
         _lives = Mathf.Clamp(_lives, 0, 3);
 
 
@@ -227,7 +229,7 @@ public class Player : MonoBehaviour
 
     public void Reload()
     {
-        _currentAmmo = 15;
+        _currentAmmo = _maxAmmo;
         _uiManager.UpdateAmmo(_currentAmmo);
     }
 
