@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _speed = 6;
     private int _speedBoost = 2;
+    private int _thrusterBoost = 2;
 
     [SerializeField]
     private float _fireRate = 0.15f;
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
     private bool _isTripleShotActive;
     private bool _isSpeedBoostActive;
     private bool _isShieldActive;
+    private bool _isThrusterActive;
 
 
 
@@ -99,16 +101,24 @@ public class Player : MonoBehaviour
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
 
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+           _speed += _thrusterBoost;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _speed -= _thrusterBoost;
+        }
+
         if (_isSpeedBoostActive == false)
         {
             transform.Translate(direction * _speed * Time.deltaTime);
         }
-        else
+        else if (_isSpeedBoostActive == true)
         {
 
             transform.Translate(direction * _speed * _speedBoost * Time.deltaTime);
         }
-
 
 
         if (transform.position.y >= 6)
@@ -191,6 +201,7 @@ public class Player : MonoBehaviour
         }
 
     }
+
 
     public void SpeedUp()
     {
