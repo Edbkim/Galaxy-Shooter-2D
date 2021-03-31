@@ -1822,6 +1822,8 @@ MonoBehaviour:
     type: 3}
   _shield: {fileID: 1830270909}
   _mainCamera: {fileID: 253255930}
+  _explosion: {fileID: 8108473630387282853, guid: ebce992d1d6ca5742b667f0bc448d9e3,
+    type: 3}
   _thrusterR: {fileID: 1320879378}
   _thrusterL: {fileID: 300310393}
   _speed: 6
@@ -1831,6 +1833,7 @@ MonoBehaviour:
   _shieldHealth: 0
   _score: 0
   _laserSFX: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  _takeDamageSFX: {fileID: 8300000, guid: 72ca4716aa8bcc241be126d043a3dd1a, type: 3}
   _outOfAmmoSFX: {fileID: 8300000, guid: 63edb97a50aea5e4fa9c2f64c61d043c, type: 3}
 --- !u!212 &1803239726
 SpriteRenderer:

@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     private GameObject _shield;
     [SerializeField]
     private GameObject _mainCamera;
+    [SerializeField]
+    private GameObject _explosion;
 
     [SerializeField]
     private GameObject _thrusterR, _thrusterL;
@@ -259,6 +261,7 @@ public class Player : MonoBehaviour
                 {
                     _spawnManager.PlayerDeath();
                     _gameManager.GameOver();
+                    Instantiate(_explosion.gameObject, transform.position, Quaternion.identity);
                     Destroy(this.gameObject);
                 }
             }
