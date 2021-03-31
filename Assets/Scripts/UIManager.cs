@@ -11,7 +11,9 @@ public class UIManager : MonoBehaviour
     private Text _gameOver;
     [SerializeField]
     private Text _restart;
-    
+
+    [SerializeField]
+    private Text _ammoText;
 
     private int _currentScore;
 
@@ -19,6 +21,8 @@ public class UIManager : MonoBehaviour
     private Image _livesImage;
     [SerializeField]
     private Sprite[] _livesSprites;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +49,21 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void UpdateAmmo(int ammo)
+    {
+        if (ammo >= 1)
+        {
+            _ammoText.color = Color.white;
+            _ammoText.text = "Ammo: " + ammo;
+        }
+        else if (ammo <= 0)
+        {
+            _ammoText.text = "OUT OF AMMO";
+            _ammoText.color = Color.yellow;
+        }
+
+
+    }
     void GameOverSequence()
     {
         _restart.gameObject.SetActive(true);
@@ -62,6 +81,7 @@ public class UIManager : MonoBehaviour
         }
 
     }
+
 
 
 }

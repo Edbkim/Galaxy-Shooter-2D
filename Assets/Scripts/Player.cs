@@ -30,6 +30,9 @@ public class Player : MonoBehaviour
     private int _lives = 3;
 
     [SerializeField]
+    private int _currentAmmo;
+
+    [SerializeField]
     private int _shieldHealth;
 
     [SerializeField]
@@ -38,6 +41,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private AudioClip _laserSFX;
     private AudioSource _audioSource;
+
+    [SerializeField]
+    private AudioClip _outOfAmmoSFX;
 
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
@@ -90,6 +96,10 @@ public class Player : MonoBehaviour
             Debug.LogError("Shield Sprite Renderer is NULL");
         }
 
+        
+        _currentAmmo = 15;
+        UpdateAmmo();
+
     }
 
     // Update is called once per frame
@@ -103,6 +113,8 @@ public class Player : MonoBehaviour
         {
             FireLaser();
         }
+
+        _currentAmmo = Mathf.Clamp(_currentAmmo, 0, 15);
 
 
     }
@@ -160,14 +172,22 @@ public class Player : MonoBehaviour
         if (_isTripleShotActive == true)
         {
             Instantiate(_tripleShot, transform.position, Quaternion.identity);
+            _audioSource.Play();
+        }
+        else if (_isTripleShotActive == false && _currentAmmo >= 1)
+        {
+            _currentAmmo--;
+            UpdateAmmo();
+            _offset = new Vector3(0, 1.05f, 0);
+            Instantiate(_laser, transform.position + _offset, Quaternion.identity);
+            _audioSource.Play();
         }
         else
         {
-            _offset = new Vector3(0, 1.05f, 0);
-            Instantiate(_laser, transform.position + _offset, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(_outOfAmmoSFX, transform.position);
+            UpdateAmmo();
         }
 
-        _audioSource.Play();
  
 
     }
@@ -262,6 +282,11 @@ public class Player : MonoBehaviour
         _score = _score += plusScore;
         _uiManager.UpdateScore(_score);
 
+    }
+
+    public void UpdateAmmo()
+    {
+        _uiManager.UpdateAmmo(_currentAmmo);
     }
 
     IEnumerator TripleShotPowerDown()
