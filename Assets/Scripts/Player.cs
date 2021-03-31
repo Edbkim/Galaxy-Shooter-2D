@@ -188,8 +188,12 @@ public class Player : MonoBehaviour
             UpdateAmmo();
         }
 
- 
+    }
 
+    public void Reload()
+    {
+        _currentAmmo = 15;
+        _uiManager.UpdateAmmo(_currentAmmo);
     }
 
     public void Damage()
