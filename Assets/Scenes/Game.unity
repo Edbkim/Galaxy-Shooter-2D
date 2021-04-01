@@ -557,6 +557,7 @@ MonoBehaviour:
   _ammoMaxText: {fileID: 651865948}
   _waveText: {fileID: 1235330268}
   _livesImage: {fileID: 1343496688}
+  _homingBombImage: {fileID: 913438125}
   _livesSprites:
   - {fileID: 21300000, guid: ba53e111f0125654cabfd4eefaf3a657, type: 3}
   - {fileID: 21300000, guid: 80fba5ece7697c44eacc036539c1b552, type: 3}
@@ -2143,7 +2144,8 @@ MonoBehaviour:
     type: 3}
   _homingShot: {fileID: 1567136133611179942, guid: 4c5628ae937c7a64faa754378c80602e,
     type: 3}
-  _homingBomb: {fileID: 0}
+  _homingBomb: {fileID: 5796701387611092953, guid: ec44b52dc51112c408c742823d75ac63,
+    type: 3}
   _shield: {fileID: 1830270909}
   _mainCamera: {fileID: 253255930}
   _explosion: {fileID: 8108473630387282853, guid: ebce992d1d6ca5742b667f0bc448d9e3,
@@ -2151,6 +2153,7 @@ MonoBehaviour:
   _thrusterR: {fileID: 1320879378}
   _thrusterL: {fileID: 300310393}
   _speed: 6
+  _homingChargeTime: 6
   _fireRate: 0.15
   _lives: 3
   _currentAmmo: 0
@@ -2159,6 +2162,8 @@ MonoBehaviour:
   _shieldHealth: 0
   _laserSFX: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _takeDamageSFX: {fileID: 8300000, guid: 72ca4716aa8bcc241be126d043a3dd1a, type: 3}
+  _homingBombReadySFX: {fileID: 8300000, guid: 1efe764dad314a849ba5e1bd24231360, type: 3}
+  _homingBombSFX: {fileID: 8300000, guid: 6b61060ab4a31f24b956ea5250d1db82, type: 3}
   _outOfAmmoSFX: {fileID: 8300000, guid: 63edb97a50aea5e4fa9c2f64c61d043c, type: 3}
 --- !u!212 &1803239726
 SpriteRenderer:

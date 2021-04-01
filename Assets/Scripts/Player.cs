@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     private int _speed = 6;
     private int _speedBoost = 2;
     private int _thrusterBoost = 2;
+    [SerializeField]
+    private int _homingChargeTime = 6;
 
     [SerializeField]
     private float _fireRate = 0.15f;
@@ -251,7 +253,7 @@ public class Player : MonoBehaviour
         AudioSource.PlayClipAtPoint(_homingBombSFX, transform.position);
         _haveHomingBomb = false;
         _uiManager.UpdateHomingBombStock(_haveHomingBomb);
-        StartCoroutine(HomingBombChargeUp());
+        StartCoroutine(HomingBombChargeUp(_homingChargeTime));
 
         
     }
@@ -488,9 +490,9 @@ public class Player : MonoBehaviour
         }*/
 
     }
-    IEnumerator HomingBombChargeUp()
+    IEnumerator HomingBombChargeUp(int chargetime)
     {
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(chargetime);
         _haveHomingBomb = true;
         _uiManager.UpdateHomingBombStock(_haveHomingBomb);
         AudioSource.PlayClipAtPoint(_homingBombReadySFX, transform.position);
