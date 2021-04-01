@@ -368,6 +368,10 @@ public class Player : MonoBehaviour
     public void Heal()
     {
         _lives++;
+        if (_lives > 3)
+        {
+            _lives = 3;
+        }
         _uiManager.UpdateLives(_lives);
         UpdateThrusters();
     }

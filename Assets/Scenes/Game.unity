@@ -1992,6 +1992,7 @@ MonoBehaviour:
   - {fileID: 6489920481883347596, guid: 174bca3d84900734db18b36b15a109cb, type: 3}
   - {fileID: 4776093275942383555, guid: 52e5a3dcd86effc4e96788f32a701663, type: 3}
   _stopSpawning: 0
+  _wave: 0
 --- !u!1 &1774865078
 GameObject:
   m_ObjectHideFlags: 0
@@ -2329,7 +2330,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2061448949
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 333b0196b7a764df5a7768ead9b69dbc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

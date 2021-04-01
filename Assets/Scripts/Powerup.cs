@@ -6,6 +6,7 @@ public class Powerup : MonoBehaviour
 {
     [SerializeField]
     private int _speed = 3;
+    private int _suckSpeed = 5;
 
     [SerializeField]
     private int _ammoDown = 1;
@@ -16,6 +17,12 @@ public class Powerup : MonoBehaviour
     [SerializeField]
     private AudioClip _powerUPSFX;
 
+    private Transform _target;
+
+    private void Start()
+    {
+        _target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -28,6 +35,11 @@ public class Powerup : MonoBehaviour
             Destroy(this.gameObject);
         }
         
+        if (Input.GetKey(KeyCode.C) && transform.position.y <= 6 && transform.position.y >= -3)
+        {
+            float step = _suckSpeed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, _target.position, step);
+        }
     }
 
 
