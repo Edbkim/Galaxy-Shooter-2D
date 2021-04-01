@@ -50,7 +50,7 @@ public class Powerup : MonoBehaviour
 
             Player player = other.gameObject.GetComponent<Player>();
 
-            AudioSource.PlayClipAtPoint(_powerUPSFX, transform.position);
+            AudioSource.PlayClipAtPoint(_powerUPSFX, new Vector3(0, 1, -10));
 
             if (player != null)
             {

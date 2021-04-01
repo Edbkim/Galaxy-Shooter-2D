@@ -7,6 +7,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _enemy; //0 Default, 1 Sider
     [SerializeField]
+    private GameObject[] _boss; //0 First Boss
+    [SerializeField]
     private GameObject _enemyContainer;
 
     [SerializeField]
@@ -19,6 +21,7 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 _enemySpawnPos;
     private Vector3 _powerUpSpawnPos;
+    private Vector3 _bossStartPos;
 
     private int[] _siderSpawnPos = new int[] { -8, 8 };
 
@@ -29,13 +32,19 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField]
     private int _wave;
-    private int _maxWave = 3;
+    [SerializeField]
+    private int _maxWave = 4;
 
- 
+    [SerializeField]
+    private AudioClip _siren;
 
     private float _randomPowerUp;
 
+    [SerializeField]
+    private GameObject _backgroundMusic;
+
     private UIManager _uiManager;
+    private AudioSource _audioSource;
 
 
 
@@ -44,6 +53,9 @@ public class SpawnManager : MonoBehaviour
     {
         _wave = 0;
         _uiManager = GameObject.Find("UI_Manager").GetComponent<UIManager>();
+
+        
+
     }
 
     // Update is called once per frame
@@ -83,6 +95,9 @@ public class SpawnManager : MonoBehaviour
                         _shielded = true;
                         EnemySpawn(Random.Range(0, 2));
                         yield return new WaitForSeconds(1);
+                        break;
+                    case 4:
+                        SpawnBoss();
                         break;
                     default:
                         break;
@@ -186,8 +201,38 @@ public class SpawnManager : MonoBehaviour
 
     }
 
+    private void SpawnBoss()
+    {
+        _backgroundMusic = GameObject.Find("Background");
+        _backgroundMusic.SetActive(false);
+
+        _uiManager.BossAlertActive();
+        StartCoroutine(BossSiren());
+
+
+        _audioSource = GameObject.Find("Boss_Music").GetComponent<AudioSource>();
+        if (_audioSource == null)
+        {
+            Debug.LogError("AudioSource is null");
+        }
+        else
+        {
+            _audioSource.Play();
+        }
+
+        _bossStartPos = new Vector3(0, 11.25f, 0);
+        Instantiate(_boss[0], _bossStartPos, Quaternion.identity);
+    }
+
     public void PowerUpOnHomingBomb(Vector3 position)
     {
         Instantiate(_powerups[Random.Range(0, 6)], position, Quaternion.identity);
+    }
+
+    IEnumerator BossSiren()
+    {
+        AudioSource.PlayClipAtPoint(_siren, new Vector3(0, 1, -10));
+        yield return new WaitForSeconds(4);
+        _uiManager.BossAlertInactive();
     }
 }

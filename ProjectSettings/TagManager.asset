@@ -9,6 +9,7 @@ TagManager:
   - Undefined
   - EAttack
   - Homing_Bomb
+  - Boss
   layers:
   - Default
   - TransparentFX

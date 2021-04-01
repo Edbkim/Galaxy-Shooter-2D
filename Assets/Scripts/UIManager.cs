@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text _gameOver;
     [SerializeField]
+    private Text _youWin;
+    [SerializeField]
     private Text _restart;
 
     [SerializeField]
@@ -19,6 +21,10 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Text _waveText;
+
+
+    [SerializeField]
+    private Text _bossApproachingText;
 
     private int _currentScore;
     private int _maxAmmo;
@@ -30,6 +36,11 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Sprite[] _livesSprites;
 
+    [SerializeField]
+    private AudioClip _winTheme;
+
+
+
 
 
 
@@ -37,6 +48,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         _scoreText.text = "Score: " + 0;
+
     }
 
 
@@ -55,6 +67,7 @@ public class UIManager : MonoBehaviour
         {
             GameOverSequence();
         }
+
 
     }
 
@@ -92,12 +105,30 @@ public class UIManager : MonoBehaviour
     {
             _homingBombImage.enabled = homingbomb;
     }
+
+    public void BossAlertActive()
+    {
+        _bossApproachingText.gameObject.SetActive(true);
+    }
+
+    public void BossAlertInactive()
+    {
+        _bossApproachingText.gameObject.SetActive(false);
+    }
+
     void GameOverSequence()
     {
         _restart.gameObject.SetActive(true);
         StartCoroutine(GameOver());
     }
 
+    public void WinSequence()
+    {
+        _restart.gameObject.SetActive(true);
+        AudioSource.PlayClipAtPoint(_winTheme, new Vector3(0, 1, -10));
+        _restart.gameObject.SetActive(true);
+        StartCoroutine(YouWin());
+    }
 
     IEnumerator GameOver()
     {
@@ -109,6 +140,17 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(.5f);
         }
 
+    }
+
+    IEnumerator YouWin()
+    {
+        while (true)
+        {
+            _youWin.gameObject.SetActive(true);
+            yield return new WaitForSeconds(.5f);
+            _youWin.gameObject.SetActive(false);
+            yield return new WaitForSeconds(.5f);
+        }
     }
 
 

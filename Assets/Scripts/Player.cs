@@ -81,6 +81,7 @@ public class Player : MonoBehaviour
     private bool _isShieldActive;
     private bool _isThrusterActive;
     private bool _isHomingShotActive;
+    [SerializeField]
     private bool _isInvincible;
     private bool _haveHomingBomb;
 
@@ -238,7 +239,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            AudioSource.PlayClipAtPoint(_outOfAmmoSFX, transform.position);
+            AudioSource.PlayClipAtPoint(_outOfAmmoSFX, new Vector3(0, 1, -10));
             UpdateAmmo();
         }
 
@@ -250,7 +251,7 @@ public class Player : MonoBehaviour
         GameObject homingLaser = Instantiate(_homingBomb, transform.position + _offset, Quaternion.identity);
         Laser laser = homingLaser.GetComponent<Laser>();
         laser.AssignHomingLaser();
-        AudioSource.PlayClipAtPoint(_homingBombSFX, transform.position);
+        AudioSource.PlayClipAtPoint(_homingBombSFX, new Vector3(0, 1, -10));
         _haveHomingBomb = false;
         _uiManager.UpdateHomingBombStock(_haveHomingBomb);
         StartCoroutine(HomingBombChargeUp(_homingChargeTime));
@@ -306,7 +307,7 @@ public class Player : MonoBehaviour
 
                 if (_lives >= 1)
                 {
-                    AudioSource.PlayClipAtPoint(_takeDamageSFX, transform.position);
+                    AudioSource.PlayClipAtPoint(_takeDamageSFX, new Vector3(0, 1, -10));
                     StartCoroutine(InvincibilityFrames());
                 }
 
@@ -420,6 +421,9 @@ public class Player : MonoBehaviour
             case 300:
                 _spawnManager.NextWave();
                 break;
+            case 400:
+                _spawnManager.NextWave();
+                break;
             default:
                 break;
         }
@@ -495,7 +499,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(chargetime);
         _haveHomingBomb = true;
         _uiManager.UpdateHomingBombStock(_haveHomingBomb);
-        AudioSource.PlayClipAtPoint(_homingBombReadySFX, transform.position);
-
+        AudioSource.PlayClipAtPoint(_homingBombReadySFX, new Vector3(0, 1, -10));
     }
 }
