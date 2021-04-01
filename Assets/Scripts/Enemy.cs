@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     private float _fireRate = 3f;
     private float _canFire = -1f;
 
+    private float _shieldHealth;
+
     [SerializeField]
     private int _enemyID;
 
@@ -22,6 +24,8 @@ public class Enemy : MonoBehaviour
     private GameObject _eLaserDouble;
     [SerializeField]
     private GameObject _eLaserSingle;
+    [SerializeField]
+    private GameObject _shield;
 
     [SerializeField]
     private AudioClip _explosionSFX;
@@ -31,6 +35,8 @@ public class Enemy : MonoBehaviour
     private AudioSource _audioSource;
 
     private bool _goingLeft;
+
+    private bool _isShieldActive;
 
     private bool _dead;
 
@@ -92,6 +98,8 @@ public class Enemy : MonoBehaviour
 
             CalculateMovementE1();
         }
+
+        ShieldHealth();
         
 
         if (Time.time > _canFire && _dead == false)
@@ -158,38 +166,72 @@ public class Enemy : MonoBehaviour
 
     }
 
+    public void HasShield()
+    {
+        _isShieldActive = true;
+        _shieldHealth = 1;
+        _shield.SetActive(true);
+    }
+
+    public void ShieldHealth()
+    {
+        if (_shieldHealth <= 0)
+        {
+            _isShieldActive = false;
+            _shield.SetActive(false);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.tag == "Player")
         {
-            _player.Damage();
-            _speed = 0;
-            _siderSpeedX = 0;
-            _siderSpeedY = 0;
-            _dead = true;
-            _animator.SetTrigger("OnEnemyDeath");
-            _audioSource.Play();
-            _collider.enabled = false;
-            Destroy(this.gameObject, 2.5f);
+            if (_isShieldActive == true)
+            {
+                _shieldHealth--;
+            }
+            else
+            {
+                _player.Damage();
+                _speed = 0;
+                _siderSpeedX = 0;
+                _siderSpeedY = 0;
+                _dead = true;
+                _animator.SetTrigger("OnEnemyDeath");
+                _audioSource.Play();
+                _collider.enabled = false;
+                Destroy(this.gameObject, 2.5f);
+            }
+
         }
 
         if (other.tag == "Laser")
         {
-            _player.AddScore(10);
+            
             Destroy(other.gameObject);
 
-            _speed = 0;
-            _siderSpeedX = 0;
-            _siderSpeedY = 0;
-            _dead = true;
+            if (_isShieldActive == true)
+            {
+                _shieldHealth--;
+            }
+            else
+            {
+                _player.AddScore(10);
+                _speed = 0;
+                _siderSpeedX = 0;
+                _siderSpeedY = 0;
+                _dead = true;
 
-            _animator.SetTrigger("OnEnemyDeath");
+                _animator.SetTrigger("OnEnemyDeath");
 
-            _audioSource.Play();
+                _audioSource.Play();
 
-            _collider.enabled = false;
+                _collider.enabled = false;
 
-            Destroy(this.gameObject, 2.5f);
+                Destroy(this.gameObject, 2.5f);
+            }
+
         }
     }
 }

@@ -385,6 +385,9 @@ public class Player : MonoBehaviour
             case 200:
                 _spawnManager.NextWave();
                 break;
+            case 300:
+                _spawnManager.NextWave();
+                break;
             default:
                 break;
         }

@@ -15,6 +15,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private bool _stopSpawning;
 
+    private bool _shielded;
+
     private Vector3 _enemySpawnPos;
     private Vector3 _powerUpSpawnPos;
 
@@ -25,8 +27,11 @@ public class SpawnManager : MonoBehaviour
     private int[] _lowChance = new int[] { 4, 6 }; // 4 Health, 6 AmmoMaxDown
     private int[] _veryLowChance = new int[] { 5 }; // 5 HomingShot
 
+    [SerializeField]
     private int _wave;
-    private int _maxWave = 2;
+    private int _maxWave = 3;
+
+ 
 
     private float _randomPowerUp;
 
@@ -60,7 +65,6 @@ public class SpawnManager : MonoBehaviour
             while (_stopSpawning == false)
             {
 
-
                 switch (_wave)
                 {
                     case 0:
@@ -74,6 +78,13 @@ public class SpawnManager : MonoBehaviour
                     case 2:
                         EnemySpawn(Random.Range(0, 2));
                         yield return new WaitForSeconds(1);
+                        break;
+                    case 3:
+                        _shielded = true;
+                        EnemySpawn(Random.Range(0, 2));
+                        yield return new WaitForSeconds(1);
+                        break;
+                    default:
                         break;
                 }
  
@@ -138,15 +149,39 @@ public class SpawnManager : MonoBehaviour
     {
         if (enemyID == 0)
         {
-            _enemySpawnPos = new Vector3(Random.Range(-10.5f, 11f), 8, 0);
-            GameObject newEnemy = Instantiate(_enemy[enemyID], _enemySpawnPos, Quaternion.identity);
-            newEnemy.transform.parent = _enemyContainer.transform;
+            if (_shielded == false)
+            {
+                _enemySpawnPos = new Vector3(Random.Range(-10.5f, 11f), 8, 0);
+                GameObject newEnemy = Instantiate(_enemy[enemyID], _enemySpawnPos, Quaternion.identity);
+                newEnemy.transform.parent = _enemyContainer.transform;
+            }
+            else
+            {
+                _enemySpawnPos = new Vector3(Random.Range(-10.5f, 11f), 8, 0);
+                GameObject newEnemy = Instantiate(_enemy[enemyID], _enemySpawnPos, Quaternion.identity);
+                Enemy enemy = newEnemy.GetComponent<Enemy>();
+                enemy.HasShield();
+                newEnemy.transform.parent = _enemyContainer.transform;
+            }
+
         }
         else if (enemyID == 1)
         {
-            _enemySpawnPos = new Vector3(Random.Range(0, _siderSpawnPos.Length), 8, 0);
-            GameObject newEnemy = Instantiate(_enemy[enemyID], _enemySpawnPos, Quaternion.identity);
-            newEnemy.transform.parent = _enemyContainer.transform;
+            if (_shielded == false)
+            {
+                _enemySpawnPos = new Vector3(Random.Range(0, _siderSpawnPos.Length), 8, 0);
+                GameObject newEnemy = Instantiate(_enemy[enemyID], _enemySpawnPos, Quaternion.identity);
+                newEnemy.transform.parent = _enemyContainer.transform;
+            }
+            else
+            {
+                _enemySpawnPos = new Vector3(Random.Range(0, _siderSpawnPos.Length), 8, 0);
+                GameObject newEnemy = Instantiate(_enemy[enemyID], _enemySpawnPos, Quaternion.identity);
+                Enemy enemy = newEnemy.GetComponent<Enemy>();
+                enemy.HasShield();
+                newEnemy.transform.parent = _enemyContainer.transform;
+            }
+
         }
 
     }
