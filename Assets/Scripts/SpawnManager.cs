@@ -185,4 +185,9 @@ public class SpawnManager : MonoBehaviour
         }
 
     }
+
+    public void PowerUpOnHomingBomb(Vector3 position)
+    {
+        Instantiate(_powerups[Random.Range(0, 6)], position, Quaternion.identity);
+    }
 }

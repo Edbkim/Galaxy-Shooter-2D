@@ -8,6 +8,7 @@ TagManager:
   - Laser
   - Undefined
   - EAttack
+  - Homing_Bomb
   layers:
   - Default
   - TransparentFX

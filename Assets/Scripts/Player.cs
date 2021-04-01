@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _homingShot;
     [SerializeField]
+    private GameObject _homingBomb;
+    [SerializeField]   
     private GameObject _shield;
     [SerializeField]
     private GameObject _mainCamera;
@@ -56,6 +58,10 @@ public class Player : MonoBehaviour
     private AudioClip _laserSFX;
     [SerializeField]
     private AudioClip _takeDamageSFX;
+    [SerializeField]
+    private AudioClip _homingBombReadySFX;
+    [SerializeField]
+    private AudioClip _homingBombSFX;
     private AudioSource _audioSource;
 
     [SerializeField]
@@ -74,6 +80,7 @@ public class Player : MonoBehaviour
     private bool _isThrusterActive;
     private bool _isHomingShotActive;
     private bool _isInvincible;
+    private bool _haveHomingBomb;
 
 
 
@@ -127,6 +134,7 @@ public class Player : MonoBehaviour
 
         
         _currentAmmo = _maxAmmo;
+        _haveHomingBomb = true;
         UpdateAmmo();
         _uiManager.UpdateMaxAmmo(_maxAmmo);
 
@@ -142,6 +150,11 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
             FireLaser();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && _haveHomingBomb == true)
+        {
+            FireHomingBomb();
         }
 
         _currentAmmo = Mathf.Clamp(_currentAmmo, 0, _maxAmmo);
@@ -220,7 +233,6 @@ public class Player : MonoBehaviour
             Laser laser = homingLaser.GetComponent<Laser>();
             laser.AssignHomingLaser();
             _audioSource.Play();
-
         }
         else
         {
@@ -228,6 +240,20 @@ public class Player : MonoBehaviour
             UpdateAmmo();
         }
 
+    }
+
+    void FireHomingBomb()
+    {
+        
+        GameObject homingLaser = Instantiate(_homingBomb, transform.position + _offset, Quaternion.identity);
+        Laser laser = homingLaser.GetComponent<Laser>();
+        laser.AssignHomingLaser();
+        AudioSource.PlayClipAtPoint(_homingBombSFX, transform.position);
+        _haveHomingBomb = false;
+        _uiManager.UpdateHomingBombStock(_haveHomingBomb);
+        StartCoroutine(HomingBombChargeUp());
+
+        
     }
 
     public void Reload()
@@ -240,9 +266,9 @@ public class Player : MonoBehaviour
     {
         _maxAmmo -= ammoDown;
 
-        if (_maxAmmo < 5)
+        if (_maxAmmo < _minimumMaxAmmo)
         {
-            _maxAmmo = 5;
+            _maxAmmo = _minimumMaxAmmo;
         }
 
         if (_currentAmmo > _maxAmmo)
@@ -460,7 +486,14 @@ public class Player : MonoBehaviour
 
 
         }*/
-        
+
+    }
+    IEnumerator HomingBombChargeUp()
+    {
+        yield return new WaitForSeconds(6);
+        _haveHomingBomb = true;
+        _uiManager.UpdateHomingBombStock(_haveHomingBomb);
+        AudioSource.PlayClipAtPoint(_homingBombReadySFX, transform.position);
 
     }
 }

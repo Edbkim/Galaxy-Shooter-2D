@@ -233,5 +233,25 @@ public class Enemy : MonoBehaviour
             }
 
         }
+
+        if (other.tag == "Homing_Bomb")
+        {
+            Destroy(other.gameObject);
+
+            _player.AddScore(10);
+            _speed = 0;
+            _siderSpeedX = 0;
+            _siderSpeedY = 0;
+            _dead = true;
+
+            _animator.SetTrigger("OnEnemyDeath");
+
+            _audioSource.Play();
+
+            _collider.enabled = false;
+            SpawnManager spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+            spawnManager.PowerUpOnHomingBomb(transform.position);
+            Destroy(this.gameObject, 2.5f);
+        }
     }
 }

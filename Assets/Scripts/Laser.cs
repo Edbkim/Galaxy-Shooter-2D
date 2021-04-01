@@ -31,11 +31,20 @@ public class Laser : MonoBehaviour
         }
         else if (_isHomingLaser == true)
         {
-            _target = GameObject.FindGameObjectWithTag("Enemy").transform;
-            HomingLaser();
-            Destroy(this.gameObject, 2);
+            
+            if (GameObject.FindGameObjectWithTag("Enemy") != null)
+            {
+                _target = GameObject.FindGameObjectWithTag("Enemy").transform;
+                HomingLaser();
+                Destroy(this.gameObject, 2);
+            }
+            else if (GameObject.FindGameObjectWithTag("Enemy") == null)
+            {
+                MoveUp();
+            }
+
         }      
-        else
+        else if (_isEnemyLaser == true)
         {
             MoveDown();
         }

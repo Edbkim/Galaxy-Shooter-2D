@@ -26,7 +26,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Image _livesImage;
     [SerializeField]
+    private Image _homingBombImage;
+    [SerializeField]
     private Sprite[] _livesSprites;
+
 
 
 
@@ -84,11 +87,17 @@ public class UIManager : MonoBehaviour
     {
         _waveText.text = "Wave: " + wave;
     }
+
+    public void UpdateHomingBombStock(bool homingbomb)
+    {
+            _homingBombImage.enabled = homingbomb;
+    }
     void GameOverSequence()
     {
         _restart.gameObject.SetActive(true);
         StartCoroutine(GameOver());
     }
+
 
     IEnumerator GameOver()
     {
