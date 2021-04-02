@@ -114,7 +114,7 @@ public class SpawnManager : MonoBehaviour
         while (_stopSpawning == false)
         {
             yield return new WaitForSeconds(Random.Range(3, 7));
-            _powerUpSpawnPos = new Vector3(Random.Range(-10.5f, 11f), 8, 0);
+            _powerUpSpawnPos = new Vector3(Random.Range(-9f, 9f), 8, 0);
             _randomPowerUp = Random.Range(0, 101);
 
             if (_randomPowerUp <= 40)
@@ -166,13 +166,13 @@ public class SpawnManager : MonoBehaviour
         {
             if (_shielded == false)
             {
-                _enemySpawnPos = new Vector3(Random.Range(-10.5f, 11f), 8, 0);
+                _enemySpawnPos = new Vector3(Random.Range(-9.0f, 9f), 8, 0);
                 GameObject newEnemy = Instantiate(_enemy[enemyID], _enemySpawnPos, Quaternion.identity);
                 newEnemy.transform.parent = _enemyContainer.transform;
             }
             else
             {
-                _enemySpawnPos = new Vector3(Random.Range(-10.5f, 11f), 8, 0);
+                _enemySpawnPos = new Vector3(Random.Range(-9.0f, 9f), 8, 0);
                 GameObject newEnemy = Instantiate(_enemy[enemyID], _enemySpawnPos, Quaternion.identity);
                 Enemy enemy = newEnemy.GetComponent<Enemy>();
                 enemy.HasShield();
